@@ -1,0 +1,46 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgba(19, 74, 224,.9);
+    font-family: "Roboto";
+    min-width: 100%;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    height : 350px;
+    width: 400px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: white;
+    
+}
+.card h3{
+    font-size: 1.8rem;
+    text-align: center;
+}
+.card input{
+    background-color: rgba(128,128,128,.3);
+    font-size: 1.02em;
+}
+.card button{
+    background-color: rgba(19, 74, 224,.9) ;
+    color:white;
+    font-size: 1.03em;
+}
+.card input,button{
+    height: 40px;
+    width: 93%;
+    margin : 10px;
+    border-radius: 10px;
+    border:1px solid gray;
+    
+    
+}
+.card span{
+    width:100%;
+    text-align: center;
+    margin-top: 8px;
+}
