@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        #middle{
+            display: flex;
+            flex-direction: column;
+        }
+        .item{
+            display: flex;
+            justify-content: space-around;
+        }
+        .left
+        {
+            gap:10px;
+            display: flex;
+        }
+        .leftright{
+            display: flex;
+            gap : 15px;
+            flex-direction: column;
+        }
+        .image{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="car" style="display: flex; flex-direction: column;">
+        <span>Number of items you launched : <span id="totalitems">0</span></span>
+        <span>Total number of items you recieved : <span id = "totalorders">0</span></span>
+        <div id="middle">
+            <div class="item">
+                <div class="left">
+                    <h3>Product details</h3>
+                </div>
+                <div class="right">
+                    <h3>Total Orders  </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function items()
+        {
+            const xttp = new XMLHttpRequest();
+            xttp.onload = function ()
+            {
+                products =JSON.parse(this.responseText);
+                let totalitems=0;
+                let totalorders=0;
+                let parent = document.getElementById("middle");
+                for (let product of products )
+                {
+                    let item = document.createElement("div");
+                    let left = document.createElement("div");
+                    let leftleft = document.createElement("div");
+                    let leftright = document.createElement("div");
+                    let right = document.createElement("div");
+                    let countoforders = document.createElement("span");
+                    
+                    let image = document.createElement("img");
+                    let name = document.createElement("span");
+                    let description = document.createElement("span");
+                    let price = document.createElement("span");
+
+                    image.src = "images/"+product['image'];
+                    name.textContent = product['pname'];
+                    description.textContent = product['description'];
+                    price.textContent = product['price'];
+                    countoforders.textContent = product['c'];
+
+                    
+
+                    left.appendChild(leftleft);
+                    left.appendChild(leftright);
+
+                    leftright.appendChild(name);
+                    leftleft.appendChild(image);
+                    leftright.appendChild(description);
+                    leftright.appendChild(price);
+
+                    right.appendChild(countoforders);
+
+                    item.appendChild(left);
+                    item.appendChild(right);
+
+                    
+
+                    left.classList.add('left');
+                    right.classList.add('right');
+                    leftleft.classList.add('leftleft');
+                    leftright.classList.add('leftright');
+                    image.classList.add('image');
+
+                    name.classList.add('name');
+                    price.classList.add('price');
+                    countoforders.classList.add('countoforders');
+                    item.classList.add('item');
+                    description.classList.add('description');
+
+                    parent.appendChild(item);
+                    totalitems++;
+                    totalorders+= eval(product['c']);
+
+
+                }
+                document.getElementById("totalitems").textContent = totalitems;
+                document.getElementById("totalorders").textContent = totalorders;
+            }
+            xttp.open("POST","seller.php?f=items",true);
+            xttp.send();
+        }
+        window.onload = function()
+        {
+            items();
+        }
+    </script>
+</body>
+</html>

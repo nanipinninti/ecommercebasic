@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>orders</title>
+    <style>
+        #items{
+            display: flex;
+            flex-direction: column;
+            gap : 15px;
+        }
+        .image{
+            width: 100px;
+            height:  100px;
+        }
+        .box{
+            display: flex;
+            gap : 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head" >
+        Your orders  <br>
+    </div>
+    <div id="items">
+
+    </div>
+    <script>
+    
+        function orders()
+        {
+            fetch("main.php?f=orders")
+            .then(function(data){return data.json()})
+            .then(function (order){
+                let parent = document.getElementById("items")
+                for (let item of order){
+                    let box = document.createElement("div");
+                    let img = document.createElement("img");
+                    let name = document.createElement("h3");
+                    let price = document.createElement("h4");
+
+                    img.src = 'images/'+item['image'];
+                    name.textContent = item['pname'];
+                    price.textContent = item['price'];
+
+                    box.appendChild(img);
+                    box.appendChild(name);
+                    box.appendChild(price);
+                    
+                    box.classList.add('box');
+                    img.classList.add('image');
+                    name.classList.add('name');
+                    price.classList.add('price');
+                    parent.appendChild(box);
+
+                }
+            })
+        }
+        window.onload = function ()
+        {
+            orders();
+        }
+    </script>
+</body>
+</html>

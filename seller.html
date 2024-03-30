@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="seller.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>seller</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+        }
+        #body{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap : 20px;
+        }
+        .image{
+            height: 200px;
+            width:200px;
+        }
+        .item{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="head">
+        <div class="headleft">
+            <text>ekart</text>
+        </div>
+        <div class="headright">
+            <a href="launchproduct.html">LaunchProduct</a>
+            <a href="dashboard.html">Dashboard</a>
+        </div>
+    </div>
+    <h3>The products that you have been launched</h3>
+    <div id="body">
+
+    </div>
+    <div class="foot">
+
+    </div>
+    <script>
+        function items()
+        {
+            const xttp = new XMLHttpRequest();
+            xttp.onload = function ()
+            {
+                products =JSON.parse(this.responseText);
+                let parent = document.getElementById("body");
+                for (let product of products )
+                {
+                    let item = document.createElement("div");
+                    
+                    let image = document.createElement("img");
+                    let name = document.createElement("span");
+                    let description = document.createElement("span");
+                    let price = document.createElement("span");
+
+                    image.src = "images/"+product['image'];
+                    name.textContent = product['pname'];
+                    description.textContent = product['description'];
+                    price.textContent = product['price'];
+
+                    item.appendChild(name);
+                    item.appendChild(image);
+                    item.appendChild(description);
+                    item.appendChild(price);
+
+                    image.classList.add('image');
+
+                    name.classList.add('name');
+                    price.classList.add('price');
+
+                    item.classList.add('item');
+                    description.classList.add('description');
+
+                    parent.appendChild(item);
+
+
+                }
+            }
+            xttp.open("POST","seller.php?f=items",true);
+            xttp.send();
+        }
+        window.onload = function()
+        {
+            items();
+        }
+    </script>
+    </script>
+</body>
+</html>

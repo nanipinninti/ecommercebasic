@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchProduct</title>
+    <style>
+        body{
+            margin:auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            min-width: 100%;
+        }
+        .card{
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            height: 300px;
+            width: 350px;
+            background-color: aqua;
+        }
+        .head{
+            display: flex;
+            margin:auto;
+        }
+        .middle{
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            margin: auto;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="head">
+            <h3>Enter Your Product Details</h3>
+        </div>
+        <form class="middle" method="POST" action="launchproduct.php" enctype="multipart/form-data">
+            <input type="text"  name="productname" placeholder="Enter name of the Product">
+            <textarea name="description" name ="description"  cols="40" rows="3" placeholder="description about the produt"></textarea>
+            <input type="text" placeholder="Enter price" name="price">
+            <label for="productimage">Upload image</label><input type="file" name="productimage" >
+            <button type="submit">Submit</button>
+        </form>
+        <div class="foot">
+
+        </div>
+    </div>
+</body>
+</html>

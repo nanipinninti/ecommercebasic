@@ -1,0 +1,26 @@
+.head{
+    display: flex;
+    justify-content: space-around;
+}
+.products{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 50px;
+
+}
+.box{
+    display: flex;
+    width: 350px;
+    flex-direction: column;
+    height : 450px;
+    border-radius: 10px;
+    background-color: aqua;
+}
+.foot{
+    display: flex;
+    justify-content: space-around;
+}
+.image{
+    width: 90%;
+    height: 50%;
+}

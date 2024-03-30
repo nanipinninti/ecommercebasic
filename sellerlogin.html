@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .card{
+            display: flex;
+            flex-direction: column;
+            height : 200px;
+            width: 300px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="body" > 
+        <form class="card" method="POST" action="sellerlogin.php">
+            <h3>Login / Signup</h3>
+            <input type="text" name = "sellername" placeholder="Enter sellername" >
+            <input type="password" name="password" placeholder="enter password" >
+            <button type="submit">Submit</button>
+            <span>Not a member? <a href="#">Signup</a></span>
+        </form>
+    </div>
+</body>
+</html>

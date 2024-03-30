@@ -1,0 +1,10 @@
+.head{
+    width:  100%;
+    display: flex;
+    justify-content: space-around;
+}
+.headright{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
