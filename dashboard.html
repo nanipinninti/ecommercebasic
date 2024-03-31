@@ -4,44 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <style>
-        #middle{
-            display: flex;
-            flex-direction: column;
-        }
-        .item{
-            display: flex;
-            justify-content: space-around;
-        }
-        .left
-        {
-            gap:10px;
-            display: flex;
-        }
-        .leftright{
-            display: flex;
-            gap : 15px;
-            flex-direction: column;
-        }
-        .image{
-            width: 100px;
-            height: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 </head>
 <body>
-    
-    <div class="car" style="display: flex; flex-direction: column;">
+    <div class="fhead">
+        <div class="fheadleft">
+            <a href="seller.html"><span class="material-symbols-outlined">
+                home
+                </span></a>
+        </div>
+        <div class="fheadright">
+            <a href="launchproduct.html" class="launchproduct">LaunchProduct</a>
+            <a href="dashboard.html" class="dashboard">Dashboard</a>
+        </div>
+    </div>
+    <div class="head">
         <span>Number of items you launched : <span id="totalitems">0</span></span>
         <span>Total number of items you recieved : <span id = "totalorders">0</span></span>
-        <div id="middle">
-            <div class="item">
-                <div class="left">
-                    <h3>Product details</h3>
-                </div>
-                <div class="right">
-                    <h3>Total Orders  </h3>
-                </div>
+    </div>
+    <div id="middle">
+        <div class="mdddlehead">
+            <div class="mleft">
+                <h3>Product details</h3>
+            </div>
+            <div class="mright">
+                <h3>Total Orders  </h3>
             </div>
         </div>
     </div>

@@ -19,6 +19,11 @@ function username(){
         }
     }
 }
+function sessionexit()
+{// Destroy the session
+    session_destroy();
+    echo 'successs';
+}
 function products (){
     global $con;
     $query = "select * from products";

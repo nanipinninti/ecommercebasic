@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
@@ -31,9 +34,9 @@
                 for (let data of k ){
                     
                 let box = document.createElement("div");
-                let name = document.createElement("h3");
-                let price = document.createElement("h3");
-                let description = document.createElement("h3");
+                let name = document.createElement("span");
+                let price = document.createElement("span");
+                let description = document.createElement("span");
                 let image = document.createElement("img");
                 let source = "images/"+data.image;
                 let foot = document.createElement("div");
@@ -41,7 +44,7 @@
                 let right = document.createElement("button");
                     
                 name.textContent = data.pname;
-                price.textContent = data.price;
+                price.textContent = 'Price : $'+data.price;
                 description.textContent = data.description;
                 image.src = source;
                 left.textContent = "Buy";
@@ -76,6 +79,17 @@
             })
 
         }
+        function sessionexit()
+        {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function()
+            {
+                console.log(this.responseText);
+                window.location.href='login.html';
+            }
+            xhttp.open("GET", "main.php?f=sessionexit", true);
+            xhttp.send();
+        }
         window.onload =function(){
             username();
             products();
@@ -86,9 +100,13 @@
     </head>
 <body>
     <div class="head">
-        <a class="cart" href="cart.html">Cart <span class="cartcount"></span></a>
-        <a class="orders" href="orders.html">orders<span class="orderscount"></span></a>
-        <a href="sellerlogin.html" class="seller">BeAnSeller</a>
+        <div class="headleft"></div>
+        <div class="headright">
+            <a class="cart" href="cart.html">Cart <span class="cartcount"></span></a>
+            <a class="orders" href="orders.html">orders<span class="orderscount"></span></a>
+            <a href="sellerlogin.html" class="seller">BeAnSeller</a>
+            <a href="#" onclick="sessionexit()">Logout</a>
+        </div>
     </div>
     <h3>Hello, <span id="id"></span> ! Welcome back !!  </h3>
     <div class="products" id="products">

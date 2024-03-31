@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="orders.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <title>orders</title>
-    <style>
-        #items{
-            display: flex;
-            flex-direction: column;
-            gap : 15px;
-        }
-        .image{
-            width: 100px;
-            height:  100px;
-        }
-        .box{
-            display: flex;
-            gap : 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
 </head>
 <body>
+    <div class="fhead">
+        <div class="fheadleft">
+            <a href="main.html"><span class="material-symbols-outlined">
+                home
+                </span></a>
+        </div>
+        <div class="fheadright">
+            <a class="cart" href="cart.html">Cart <span class="cartcount"></span></a>
+            <a class="orders" href="orders.html">orders<span class="orderscount"></span></a>
+            <a href="sellerlogin.html" class="seller">BeAnSeller</a>
+            <a href="#" onclick="sessionexit()">Logout</a>
+        </div>
+    </div>
     <div class="head" >
-        Your orders  <br>
+        <h2>Your orders </h2> 
     </div>
     <div id="items">
 
@@ -43,7 +47,7 @@
 
                     img.src = 'images/'+item['image'];
                     name.textContent = item['pname'];
-                    price.textContent = item['price'];
+                    price.textContent = '$'+item['price'];
 
                     box.appendChild(img);
                     box.appendChild(name);
@@ -57,6 +61,16 @@
 
                 }
             })
+        }
+        function sessionexit()
+        {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function()
+            {
+                window.location.href='login.html';
+            }
+            xhttp.open("GET", "main.php?f=sessionexit", true);
+            xhttp.send();
         }
         window.onload = function ()
         {

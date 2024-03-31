@@ -4,26 +4,10 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="seller.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <title>seller</title>
-    <style>
-        body{
-            display: flex;
-            flex-direction: column;
-        }
-        #body{
-            display: grid;
-            grid-template-columns: auto auto auto;
-            gap : 20px;
-        }
-        .image{
-            height: 200px;
-            width:200px;
-        }
-        .item{
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
 </head>
 <body>
     <div class="head">
@@ -31,23 +15,102 @@
             <text>ekart</text>
         </div>
         <div class="headright">
-            <a href="launchproduct.html">LaunchProduct</a>
-            <a href="dashboard.html">Dashboard</a>
+            <a href="launchproduct.html" class="launchproduct">LaunchProduct</a>
+            <a href="dashboard.html" class="dashboard">Dashboard</a>
+            <a href="#" onclick="sellerlogout()">logout</a>
         </div>
     </div>
-    <h3>The products that you have been launched</h3>
+    <h3>Hi seller <span id="sname"></span>! Welcome back!!</h3>
+    <span class="subheading">The products that you have been launched</span>
+    <div class="productordercontainer">
+        <div  class="productorderdetails" id="productorderdetails">
+            <div class="phead">
+                <span></span>
+                <img src="icons/close.png" alt="close" id="close"  onclick="cleartable()">
+            </div>
+            <div class="middle">
+                <span>Product Name : <span class="productname"></span></span>
+                <span>Product Id : <span class="productid"></span></span>
+                <span>Total orders : <span class="ordersofitem"></span></span>
+                <span>Customer Details :</span>
+                <table id="table">
+                    <tr>
+                        <th id="tid">Customer ID</th>
+                        <th id="tname">Customer Name</th>
+                        <th id="taddress">Address</th>
+                        <th id="tstatus">Status</th>
+                        <th id="torder">orderid</th>
+                    </tr>
+                </table>            
+                
+            </div>
+        </div>        
+    </div>
     <div id="body">
 
-    </div>
-    <div class="foot">
-
-    </div>
+    </div>    
     <script>
+        function cleartable()
+        {
+            document.getElementById('productorderdetails').style.display ='none';
+            //console.log("cleartablefunction");
+            let table = document.getElementById('table');
+            let rows = document.getElementsByClassName("common");
+            let i;
+            for (i=rows.length-1;i>=0;i--)
+            {
+                table.removeChild(rows[i]);
+            }
+            document.getElementsByClassName('productname')[0].innerHTML = '';
+            document.getElementsByClassName('productid')[0].innerHTML = '';
+            document.getElementsByClassName('ordersofitem')[0].innerHTML = '';
+        }
+
+        function CustomerDetails(pid)
+        {
+            const xttp = new XMLHttpRequest();
+            xttp.onload = function()
+            {
+                console.log(this.responseText);
+                let customers = JSON.parse(this.responseText);
+                let parent = document.getElementById('table');
+                for (let customer of customers)
+                {
+                    let tr = document.createElement("tr");
+                    let username = document.createElement("td");
+                    let cname = document.createElement("td");
+                    let caddress = document.createElement("td");
+                    let status = document.createElement("td");
+                    let orderid = document.createElement("td");
+
+                    username.textContent = customer['username'];
+                    cname.textContent = customer['name'];
+                    caddress.textContent = customer['address'];
+                    status.textContent = customer['status'];
+                    orderid.textContent = customer['orderid'];
+                    tr.classList.add("common");
+
+                    tr.appendChild(username);
+                    tr.appendChild(cname);
+                    tr.appendChild(caddress);
+                    tr.appendChild(status);
+                    tr.appendChild(orderid);
+
+                    parent.appendChild(tr);
+
+                }
+
+
+            }
+            xttp.open("POST","seller.php?f=customerdetails&pid="+pid,true);
+            xttp.send();
+        }
         function items()
         {
             const xttp = new XMLHttpRequest();
             xttp.onload = function ()
             {
+                //console.log(this.responseText);
                 products =JSON.parse(this.responseText);
                 let parent = document.getElementById("body");
                 for (let product of products )
@@ -63,6 +126,15 @@
                     name.textContent = product['pname'];
                     description.textContent = product['description'];
                     price.textContent = product['price'];
+                    item.onclick = function()
+                    {
+                        cleartable();
+                        document.getElementsByClassName('productname')[0].innerHTML = product['pname'];
+                        document.getElementsByClassName('productid')[0].innerHTML = product['pid'];
+                        document.getElementsByClassName('ordersofitem')[0].innerHTML = product['c'];
+                        CustomerDetails(product['pid']);
+                        document.getElementById('productorderdetails').style.display ='flex';
+                    }
 
                     item.appendChild(name);
                     item.appendChild(image);
@@ -85,11 +157,31 @@
             xttp.open("POST","seller.php?f=items",true);
             xttp.send();
         }
+        function sellername()
+        {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                document.getElementById('sname').innerText = this.responseText;
+                console.log(this.responseText);
+            }
+            xhttp.open("POST","seller.php?f=sellername",true);
+            xhttp.send();
+        }
+        function sellerlogout()
+        {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                console.log(this.responseText);
+                window.location.href = "sellerlogin.html";
+            }
+            xhttp.open("POST","seller.php?f=sellerlogout",true);
+            xhttp.send();
+        }
         window.onload = function()
         {
+            sellername();
             items();
         }
-    </script>
     </script>
 </body>
 </html>

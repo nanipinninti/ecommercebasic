@@ -4,34 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LaunchProduct</title>
-    <style>
-        body{
-            margin:auto;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            min-width: 100%;
-        }
-        .card{
-            display: flex;
-            flex-direction: column;
-            margin: auto;
-            height: 300px;
-            width: 350px;
-            background-color: aqua;
-        }
-        .head{
-            display: flex;
-            margin:auto;
-        }
-        .middle{
-            display: flex;
-            flex-direction: column;
-            width: 90%;
-            margin: auto;
-
-        }
-    </style>
+    <link rel="stylesheet" href="launchproduct.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="card">
@@ -42,7 +18,9 @@
             <input type="text"  name="productname" placeholder="Enter name of the Product">
             <textarea name="description" name ="description"  cols="40" rows="3" placeholder="description about the produt"></textarea>
             <input type="text" placeholder="Enter price" name="price">
-            <label for="productimage">Upload image</label><input type="file" name="productimage" >
+            <div class="fileupload">
+                <label for="productimage">Upload image</label><input type="file" id = "productimage" name="productimage" >
+            </div>
             <button type="submit">Submit</button>
         </form>
         <div class="foot">
